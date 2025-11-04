@@ -1,9 +1,80 @@
-[gd_scene format=3 uid="uid://2wp3wmyg47pv"]
+[gd_scene load_steps=5 format=3 uid="uid://2wp3wmyg47pv"]
 
-[node name="Hud" type="Control"]
+[ext_resource type="Script" uid="uid://dlvnaiwxte6cn" path="res://scripts/hud.gd" id="1_fls4u"]
+[ext_resource type="FontFile" uid="uid://bn1l5076dyrc8" path="res://ui/Xolonium-Regular.ttf" id="1_qpvh6"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_fls4u"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_1etfg"]
+events = [SubResource("InputEventAction_fls4u")]
+
+[node name="HUD" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_left = -0.013
+anchor_top = 0.006
+anchor_right = 0.98700005
 anchor_bottom = 1.0
+offset_left = -0.059999943
+offset_top = -0.32000017
+offset_right = -0.060028076
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fls4u")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23700002
+anchor_top = 0.043
+anchor_right = 0.758
+anchor_bottom = 0.22100002
+offset_left = -0.05999756
+offset_top = 0.03999901
+offset_right = -0.040008545
+offset_bottom = -0.120010376
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_qpvh6")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.20500001
+anchor_top = 0.231
+anchor_right = 0.80500007
+anchor_bottom = 0.38700002
+offset_left = 0.099998474
+offset_top = -0.32000732
+offset_right = 0.099975586
+offset_bottom = 0.35998535
+theme_override_font_sizes/font_size = 40
+text = "Dodge the Creeps!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.63100004
+anchor_right = 0.69500005
+anchor_bottom = 0.73600006
+offset_left = 0.13999939
+offset_top = -0.32003784
+offset_right = -0.1000061
+offset_bottom = 0.079956055
+shortcut = SubResource("Shortcut_1etfg")
+text = "Start"
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
